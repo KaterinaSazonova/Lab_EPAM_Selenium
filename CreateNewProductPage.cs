@@ -15,27 +15,29 @@ namespace Selenium_WD_Lab2
         }
 
         [FindsBy(How = How.Id, Using = "ProductName")]
-        public static IWebElement productName;
+        public IWebElement productName;
         [FindsBy(How = How.Id, Using = "CategoryId")]
-        public static IWebElement categoryId;
+        public IWebElement categoryId;
         [FindsBy(How = How.Id, Using = "SupplierId")]
-        public static IWebElement supplierId;
+        public IWebElement supplierId;
         [FindsBy(How = How.Id, Using = "UnitPrice")]
-        public static IWebElement unitPrice;
+        public IWebElement unitPrice;
         [FindsBy(How = How.Id, Using = "QuantityPerUnit")]
-        public static IWebElement quantityPerUnit;
+        public IWebElement quantityPerUnit;
         [FindsBy(How = How.Id, Using = "UnitsInStock")]
-        public static IWebElement unitsInStock;
+        public IWebElement unitsInStock;
         [FindsBy(How = How.Id, Using = "UnitsOnOrder")]
-        public static IWebElement unitsOnOrder;
+        public IWebElement unitsOnOrder;
         [FindsBy(How = How.Id, Using = "ReorderLevel")]
-        public static IWebElement reorderLevel;
+        public IWebElement reorderLevel;
         [FindsBy(How = How.XPath, Using = "//input[@type='submit']")]
-        public static IWebElement submitSend;
+        public IWebElement submitSend;
 
-        public AllProductsPage CreateNew(String pName, String category, String supplier, String uPrice, String qPerUnit, String uInStock, String uOnOrder, String rLevel)
+        public AllProductsPage CreateNew()
         {
-            CreateNewProduct.CreateNew(pName, category, supplier, uPrice, qPerUnit, uInStock, uOnOrder, rLevel);
+            CreateNewProduct.CreateNew(productName, categoryId, supplierId, unitPrice, quantityPerUnit, unitsInStock, unitsOnOrder, reorderLevel);
+            
+            submitSend.Click();
             return new AllProductsPage(driver);
         }
     }

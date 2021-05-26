@@ -2,6 +2,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Selenium_WD_Lab2.dto;
+using Selenium_WD_Lab2.Fabric;
 using System;
 
 namespace Selenium_WD_Lab2
@@ -16,7 +17,7 @@ namespace Selenium_WD_Lab2
         {
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("http://localhost:5000");
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(10000);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(10000);            
         }
 
         [OneTimeTearDown]
@@ -28,9 +29,11 @@ namespace Selenium_WD_Lab2
         [Test]
         public void Test1_Login()
         {
+            Login DataLog = new Login();
+
             LoginPage loginPage = new LoginPage(driver);
 
-            HomePage homePage = loginPage.Login(Data.log, Data.pass);
+            HomePage homePage = loginPage.Login(DataLog.Log, DataLog.Pass);
 
             Assert.AreEqual("Logout", homePage.logout.Text);
         }
@@ -44,7 +47,7 @@ namespace Selenium_WD_Lab2
 
             CreateNewProductPage createNewProduct = allProducts.NewProduct();
 
-            AllProductsPage allProducts1 = createNewProduct.CreateNew(Data.pName, Data.category, Data.supplier, Data.uPrice, Data.qPerUnit, Data.uInStock, Data.uOnOrder, Data.rLevel);
+            AllProductsPage allProducts1 = createNewProduct.CreateNew();
             
             Assert.AreEqual("All Products", allProducts1.resultCreate.Text);
         }
@@ -56,14 +59,16 @@ namespace Selenium_WD_Lab2
 
             ProductPage productPage = allProducts.ProductPage();
 
-            Assert.AreEqual("Cake", productPage.productName.GetAttribute("value"));
-            Assert.AreEqual("Confections", productPage.categoryId.Text);
-            Assert.AreEqual("Pavlova, Ltd.", productPage.supplierId.Text);
-            Assert.AreEqual("70,0000", productPage.unitPrice.GetAttribute("value"));
-            Assert.AreEqual("10 boxes * 5 pc", productPage.quantityPerUnit.GetAttribute("value"));
-            Assert.AreEqual("32", productPage.unitsInStock.GetAttribute("value"));
-            Assert.AreEqual("5", productPage.unitsOnOrder.GetAttribute("value"));
-            Assert.AreEqual("0", productPage.reorderLevel.GetAttribute("value"));
+            Product product = new Product();
+
+            Assert.AreEqual(product.PName, productPage.productName.GetAttribute("value"));
+            Assert.AreEqual(product.Category, productPage.categoryId.Text);
+            Assert.AreEqual(product.Supplier, productPage.supplierId.Text);
+            Assert.AreEqual(product.UPrice + ",0000", productPage.unitPrice.GetAttribute("value"));
+            Assert.AreEqual(product.QPerUnit, productPage.quantityPerUnit.GetAttribute("value"));
+            Assert.AreEqual(product.UInStock, productPage.unitsInStock.GetAttribute("value"));
+            Assert.AreEqual(product.UOnOrder, productPage.unitsOnOrder.GetAttribute("value"));
+            Assert.AreEqual(product.RLevel, productPage.reorderLevel.GetAttribute("value"));
 
             AllProductsPage allProducts1 = productPage.ReturnToAllProductsPage();
         }
