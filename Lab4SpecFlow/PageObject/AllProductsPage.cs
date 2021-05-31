@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace Selenium_WD_Lab2
+namespace Lab4_SpecFlow.PageObject
 {
     class AllProductsPage : AbstractPage
     {
@@ -22,17 +22,17 @@ namespace Selenium_WD_Lab2
         [FindsBy(How = How.XPath, Using = "//a[@href='/Account/Logout']")]
         public IWebElement logout;
 
-        public CreateNewProductPage NewProduct()
+        public CreateNewProductPage ClickCreateNewProduct()
         {
             createNew.Click();
             return new CreateNewProductPage(driver);
         }
-        public ProductPage ProductPage()
+        public ProductPage ClickProductPage()
         {
             product.Click();
             return new ProductPage(driver);
         }
-        public AllProductsPage ProductDelete()
+        public AllProductsPage ClickProductRemove()
         {
             productRemove.Click();
             driver.SwitchTo().Alert().Accept();

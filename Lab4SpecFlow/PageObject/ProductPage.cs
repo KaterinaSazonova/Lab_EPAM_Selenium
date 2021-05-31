@@ -3,7 +3,7 @@ using SeleniumExtras.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
 
-namespace Selenium_WD_Lab2
+namespace Lab4_SpecFlow.PageObject
 {
     class ProductPage : AbstractPage
     {

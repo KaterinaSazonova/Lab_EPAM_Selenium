@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 
 
-namespace Selenium_WD_Lab2
+namespace Lab4_SpecFlow.PageObject
 {
     abstract class AbstractPage
     {

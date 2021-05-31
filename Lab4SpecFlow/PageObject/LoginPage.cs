@@ -3,11 +3,11 @@ using SeleniumExtras.PageObjects;
 using System;
 
 
-namespace Selenium_WD_Lab2
+namespace Lab4_SpecFlow.PageObject
 {
     class LoginPage : AbstractPage
     {
-        public LoginPage (IWebDriver driver)
+        public LoginPage(IWebDriver driver)
         {
             AbstractPage.driver = driver;
             PageFactory.InitElements(driver, this);
@@ -22,10 +22,15 @@ namespace Selenium_WD_Lab2
         [FindsBy(How = How.XPath, Using = "//h2")]
         public IWebElement resultLogout;
 
-        public HomePage Login(String log, String pass)
+        public LoginPage Login(string name, string pass)
         {
-            login.SendKeys(log);
+            login.SendKeys(name);
             password.SendKeys(pass);
+            return new LoginPage(driver);
+
+        }
+        public HomePage ClickSend()
+        {
             submitInp.Click();
             return new HomePage(driver);
         }

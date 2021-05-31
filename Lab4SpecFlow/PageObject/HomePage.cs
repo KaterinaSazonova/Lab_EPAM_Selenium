@@ -2,11 +2,11 @@
 using SeleniumExtras.PageObjects;
 
 
-namespace Selenium_WD_Lab2
+namespace Lab4_SpecFlow.PageObject
 {
     class HomePage : AbstractPage
     {
-        public HomePage (IWebDriver driver)
+        public HomePage(IWebDriver driver)
         {
             AbstractPage.driver = driver;
             PageFactory.InitElements(driver, this);
@@ -17,12 +17,12 @@ namespace Selenium_WD_Lab2
         [FindsBy(How = How.XPath, Using = "//a[@href='/Account/Logout']")]
         public IWebElement logout;
 
-        public AllProductsPage Products()
+        public AllProductsPage ClickAllProducts()
         {
             allProducts.Click();
             return new AllProductsPage(driver);
         }
-        public LoginPage LogOut()
+        public LoginPage ClickLogOut()
         {
             logout.Click();
             return new LoginPage(driver);
